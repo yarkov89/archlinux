@@ -1,4 +1,8 @@
 #!/bin/bash
+loadkeys ru
+setfont cyr-sun16
+clear
+
 echo 'скрипт второй настройка системы в chroot '
 
 clear
