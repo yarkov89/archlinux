@@ -8,10 +8,10 @@ echo 'скрипт второй настройка системы в chroot '
 clear
 lsblk -f
   echo ""
-read -p "Укажите ROOT раздел(sda/sdb 1.2.3.4 (sda5 например)):" root
-echo ""
-mkfs.ext4 /dev/$root -L root
-mount /dev/$root /mnt
+#read -p "Укажите ROOT раздел(sda/sdb 1.2.3.4 (sda5 например)):" root
+#echo ""
+#mkfs.ext4 /dev/$root -L root
+#mount /dev/$root /mnt
 arch-chroot /mnt
 
 timedatectl set-ntp true
