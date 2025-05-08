@@ -412,7 +412,7 @@ do
 done
  if [[ $x_pacstrap == 1 ]]; then
   clear
- pacstrap /mnt base linux linux-headers dhcpcd  which inetutils netctl base-devel wget  efibootmgr nano  linux-firmware wpa_supplicant dialog
+ pacstrap /mnt base base-devel linux linux-firmware linux-headers dhcpcd
  genfstab -U /mnt >> /mnt/etc/fstab
  elif [[ $x_pacstrap == 2 ]]; then
   clear
@@ -448,7 +448,9 @@ echo "################################################################"
 #umount -a
 #reboot  
   elif [[ $int == 2 ]]; then
-  arch-chroot /mnt sh -c "$(curl -fsSL https://raw.githubusercontent.com/poruncov/archlinux-script-install/master/chroot.sh)"
+  #arch-chroot /mnt sh -c "$(curl -fsSL https://raw.githubusercontent.com/poruncov/archlinux-script-install/master/chroot.sh)"
+  mv arch-chroot.sh /mnt
+  chmod +x /mnt/arch-chroot.sh
 echo "################################################################"
 echo "###################    T H E   E N D      ######################"
 echo "################################################################"
