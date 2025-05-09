@@ -17,7 +17,14 @@ De ---> на выбор KDE Lxde Xfce Gnome Lxqt Mate i3
 Dm ---> на выбор sddm lxdm gdm
 "
 
-echo "Готовы приступить?"
+# Проверяем первый аргумент
+if [ "$1" == "no-mount" ]; then
+    echo "Все команды делаем в chroot"
+else
+    echo "Монтируем разделы..."
+    # Здесь ваш код для монтирования разделов
+
+    echo "Готовы приступить?"
 while 
     read -n1 -p  "
     1 - да
@@ -85,13 +92,12 @@ done
    echo 'Добавление swap раздела пропущено.'
 fi
   elif [[ $x_key == 0 ]]; then
-   echo "Монтирование пропущено"   
+   echo "Монтирование пропущено"
 fi
-#####################################
+fi
 
 echo 'Делаем arch-chroot'
-
-arch-chroot /mnt
+arch-chroot /mnt /bin/bash ./arch-chroot.sh no-mount
 
 timedatectl set-ntp true
 #pacman -Syyu  --noconfirm
