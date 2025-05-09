@@ -108,7 +108,8 @@ fi
 
 # Проверяем что скрипт запущен в chroot, если нет, то выходим
 if [ "$2" == "no-chroot" ]; then
-    echo "Установка завершена - выходим"
+    echo " Установка завершена для выхода введите >> exit << "
+    exit
 else
     echo "Продолжаем установку в chroot"
     timedatectl set-ntp true
