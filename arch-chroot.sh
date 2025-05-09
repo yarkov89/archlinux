@@ -102,7 +102,7 @@ fi
 fi
     cp ./arch-chroot.sh /mnt/
     echo 'Делаем arch-chroot'
-    arch-chroot /mnt /bin/bash ./arch-chroot.sh no-mount no-chroot
+    arch-chroot /mnt /bin/bash /arch-chroot.sh no-mount no-chroot
 fi
 
 
