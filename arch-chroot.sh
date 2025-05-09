@@ -425,7 +425,7 @@ mkinitcpio -p linux
 elif [[ $t_bootloader == 4 ]]; then
 pacman -S refind --noconfirm
 refind-install
-mkinitcpio -p linux
+#mkinitcpio -p linux
 
 elif [[ $t_bootloader == 0 ]]; then
 clear 
