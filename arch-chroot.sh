@@ -90,14 +90,22 @@ done
   swapon /dev/$swaps
   elif [[ $swap == 0 ]]; then
    echo 'Добавление swap раздела пропущено.'
+   #cp ./arch-chroot.sh /mnt/
+   #echo 'Делаем arch-chroot'
+   #arch-chroot /mnt /bin/bash ./arch-chroot.sh no-mount
 fi
   elif [[ $x_key == 0 ]]; then
    echo "Монтирование пропущено"
+   #cp ./arch-chroot.sh /mnt/
+   #echo 'Делаем arch-chroot'
+   #arch-chroot /mnt /bin/bash ./arch-chroot.sh no-mount
 fi
+    cp ./arch-chroot.sh /mnt/
+    echo 'Делаем arch-chroot'
+    arch-chroot /mnt /bin/bash ./arch-chroot.sh no-mount
 fi
 
-echo 'Делаем arch-chroot'
-arch-chroot /mnt /bin/bash ./arch-chroot.sh no-mount
+
 
 timedatectl set-ntp true
 #pacman -Syyu  --noconfirm
