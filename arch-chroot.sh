@@ -101,6 +101,7 @@ fi
    #arch-chroot /mnt /bin/bash ./arch-chroot.sh no-mount
 fi
     cp ./arch-chroot.sh /mnt/
+    chmod +x /mnt/arch-chroot.sh
     echo 'Делаем arch-chroot'
     arch-chroot /mnt /bin/bash /arch-chroot.sh no-mount no-chroot
 fi
