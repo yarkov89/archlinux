@@ -3,15 +3,94 @@ loadkeys ru
 setfont cyr-sun16
 clear
 
-echo 'скрипт второй настройка системы в chroot '
+echo "
 
-clear
+========== УСТАНОВКА ARCH LINUX (ЧАСТЬ 2) ==========
+
+ВАЖНАЯ ИНФОРМАЦИЯ!
+
+Продолжение установки Arch Linux.
+
+Если установка идет сразу после выполнения первого скрипта - то монтирование разделов можно пропустить.
+
+De ---> на выбор KDE Lxde Xfce Gnome Lxqt Mate i3
+Dm ---> на выбор sddm lxdm gdm
+"
+
+echo "Готовы приступить?"
+while 
+    read -n1 -p  "
+    1 - да
+    
+    0 - нет: " hello # sends right after the keypress
+    echo ''
+    [[ "$hello" =~ [^10] ]]
+do
+    :
+done
+ if [[ $hello == 1 ]]; then
+  clear
+  echo "Добро пожаловать в установку ArchLinux"
+  elif [[ $hello == 0 ]]; then
+   exit   
+fi
+###
+echo ""
+
+#clear
 lsblk -f
-  echo ""
-#read -p "Укажите ROOT раздел(sda/sdb 1.2.3.4 (sda5 например)):" root
+echo "2.1. МОНТИРУЕМ РАЗДЕЛЫ"
+echo ""
+
+
+echo "Нужно примонтировать разделы?"
+while 
+    read -n1 -p  "
+    1 - да
+    
+    0 - нет: " x_key 
+    echo ''
+    [[ "$x_key" =~ [^10] ]]
+do
+    :
+done
+ if [[ $x_key == 1 ]]; then
+  #clear
+  #pacman-key --refresh-keys
+  read -p "Укажите корневой ROOT раздел (sda/sdb 1.2.3.4 (например sda1 или sdb2)): " root
 #echo ""
 #mkfs.ext4 /dev/$root -L root
-#mount /dev/$root /mnt
+mount /dev/$root /mnt
+
+echo ""
+read -p "Укажите загрузочный boot раздел (sda2/sdb2 ( например sda1 или sda2 )): " bootd
+mount /dev/$bootd /mnt
+
+echo "Подключить Swap-раздел?"
+while 
+    read -n1 -p  "
+    1 - да
+    
+    0 - нет: " swap # sends right after the keypress
+    echo ''
+    [[ "$swap" =~ [^10] ]]
+do
+    :
+done
+ if [[ $swap == 1 ]]; then
+  read -p "Укажите swap раздел(sda/sdb 1.2.3.4 (например sda3)): " swaps
+  #mkswap /dev/$swaps -L swap
+  swapon /dev/$swaps
+  elif [[ $swap == 0 ]]; then
+   echo 'Добавление swap раздела пропущено.'
+fi
+  elif [[ $x_key == 0 ]]; then
+   echo "Монтирование пропущено"   
+fi
+#####################################
+
+echo 'Делаем arch-chroot'
+
 arch-chroot /mnt
 
 timedatectl set-ntp true
@@ -38,16 +117,16 @@ do
 done
 if [[ $i_rm == 0 ]]; then
 clear
-echo " очистка пропущена "
+echo "очистка пропущена"
 elif [[ $i_rm == 1 ]]; then
 rm -rf /home/$username/.*
 clear
-echo " очистка завершена "
+echo "очистка завершена"
 fi  
 #####################################
-echo " Настроим localtime "
+echo "Настроим localtime"
 echo ""
-echo " Укажите город(1-27) и нажмите Enter  "
+echo "Укажите город(1-27) и нажмите Enter"
  while 
     read   -p  "
     1 - Калининград        14 - Красноярск
