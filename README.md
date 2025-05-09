@@ -12,7 +12,7 @@ ________________________________________________________________________________
 Для установки  ArchLinux (fs ext4) вам необходимо загрузиться с установочного диска ArchLinux и в терминале выполнить   
 
 1. pacman -Sy git
-2. curl -OL https://github.com/yarkov89/archlinux.git
+2. git clone https://github.com/yarkov89/archlinux.git
 3. cd archlinux
 4. chmod +x arch-rus-install.sh
 5. ./arch-rus-install.sh
