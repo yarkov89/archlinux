@@ -94,7 +94,7 @@ echo 'Делаем arch-chroot'
 arch-chroot /mnt
 
 timedatectl set-ntp true
-pacman -Syyu  --noconfirm
+#pacman -Syyu  --noconfirm
 echo ""
 read -p "Введите имя компьютера: " hostname
 echo ""
