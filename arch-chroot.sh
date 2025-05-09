@@ -297,18 +297,22 @@ echo " Если установка производиться на vds тогд�
 echo ""
 echo " Если у вас версия UEFI моложе 2013г. тогда ставьте UEFI-grub "
 echo ""
-echo "Какой загрузчик установить UEFI(systemd или GRUB) или Grub-legacy"
+echo " Универсальный хороший загрузчик rEfind - видит автоматически все установленные системы и загрузочные флешки "
+echo ""
+echo "Какой загрузчик установить UEFI(systemd, GRUB или rEfind) или Grub-legacy?"
 while 
     read -n1 -p  "
     1 - UEFI(systemd-boot)
   
     2 - GRUB(legacy)
     
-    3 - UEFI-GRUB  
+    3 - UEFI-GRUB
+
+    4 - rEfind
     
     0 - не устанавливать загрузчик" t_bootloader
     echo ''
-    [[ "$t_bootloader" =~ [^1230] ]]
+    [[ "$t_bootloader" =~ [^12340] ]]
 do
     :
 done
@@ -417,9 +421,15 @@ echo "GRUB_DISABLE_OS_PROBER=false" >> /etc/default/grub
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 mkinitcpio -p linux
+
+elif [[ $t_bootloader == 4 ]]; then
+pacman -S refind --noconfirm
+refind-install
+mkinitcpio -p linux
+
 elif [[ $t_bootloader == 0 ]]; then
 clear 
-echo "Установка загрузчика прорущена"   
+echo "Установка загрузчика пропущена"   
 fi
 ##########
 echo ""
@@ -1680,7 +1690,7 @@ echo ""
 echo "
 Данный этап поможет исключить возможные ошибки при первом запуске системы 
 
-Фаил откроется через редактор  !nano!"
+Файл откроется через редактор  !nano!"
 echo ""
 echo " Просмотрим//отредактируем /etc/fstab ?"
 while 
@@ -1710,8 +1720,11 @@ if [[ $vm_text == 0 ]]; then
   echo 'этап пропущен'  
  exit
 elif [[ $vm_text == 1 ]]; then
-  mkdir /home/$username/{Downloads,Music,Pictures,Videos,Documents,time}   
-  chown -R $username:users  /home/$username/{Downloads,Music,Pictures,Videos,Documents,time}
+  #mkdir /home/$username/{Downloads,Music,Pictures,Videos,Documents,time}   
+  #chown -R $username:users  /home/$username/{Downloads,Music,Pictures,Videos,Documents,time}
+  #pacman S xdg-user-dirs
+  #nano /etc/xdg/user-dirs.defaults
+  
 exit
 fi  
 clear 
