@@ -64,7 +64,7 @@ mount /dev/$root /mnt
 
 echo ""
 read -p "Укажите загрузочный boot раздел (sda2/sdb2 ( например sda1 или sda2 )): " bootd
-mount /dev/$bootd /mnt
+mount /dev/$bootd /mnt/boot
 
 echo "Подключить Swap-раздел?"
 while 
