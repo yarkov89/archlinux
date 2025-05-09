@@ -102,12 +102,16 @@ fi
 fi
     cp ./arch-chroot.sh /mnt/
     echo 'Делаем arch-chroot'
-    arch-chroot /mnt /bin/bash ./arch-chroot.sh no-mount
+    arch-chroot /mnt /bin/bash ./arch-chroot.sh no-mount no-chroot
 fi
 
 
-
-timedatectl set-ntp true
+# Проверяем что скрипт запущен в chroot, если нет, то выходим
+if [ "$2" == "no-chroot" ]; then
+    echo "Установка завершена - выходим"
+else
+    echo "Продолжаем установку в chroot"
+    timedatectl set-ntp true
 #pacman -Syyu  --noconfirm
 echo ""
 read -p "Введите имя компьютера: " hostname
@@ -1744,4 +1748,4 @@ fi
 clear 
 echo " Установка завершена для выхода введите >> exit << "
 exit
-exit
+fi
