@@ -283,7 +283,8 @@ echo ""
 read -p "Укажите пароль для ROOT: " rootpassword
 #passwd --stdin
 #echo passwd "$rootpassword" --stdin
-echo "root":$rootpassword | chpasswd
+#echo "root":$rootpassword | chpasswd
+echo "root:$rootpassword" | chpasswd
 
 echo ""
 useradd -m -g users -G wheel -s /bin/bash $username
@@ -293,7 +294,8 @@ read -p "Укажите пароль для пользователя: " userpass
 echo ""
 #passwd $username --stdin
 #echo "$username" | passwd "$userpassword" --stdin
-echo $username:$userpassword | chpasswd
+#echo $username:$userpassword | chpasswd
+echo "$username:$userpassword" | chpasswd
 echo ""
 echo " Данный этап можно пропустить если не уверены в своем выборе!!! " 
 echo " "
