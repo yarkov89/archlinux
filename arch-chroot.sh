@@ -279,14 +279,14 @@ echo "KEYMAP=ru" >> /etc/vconsole.conf
 echo "FONT=cyr-sun16" >> /etc/vconsole.conf
 echo ""
 echo " Укажите пароль для ROOT "
-passwd
+passwd --stdin
 
 echo ""
 useradd -m -g users -G wheel -s /bin/bash $username
 echo ""
 echo 'Добавляем пароль для пользователя '$username' '
 echo ""
-passwd $username
+passwd $username --stdin
 echo ""
 echo " Данный этап можно пропустить если не уверены в своем выборе!!! " 
 echo " "
