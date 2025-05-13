@@ -278,15 +278,20 @@ echo 'LANG="ru_RU.UTF-8"' > /etc/locale.conf
 echo "KEYMAP=ru" >> /etc/vconsole.conf
 echo "FONT=cyr-sun16" >> /etc/vconsole.conf
 echo ""
-echo " Укажите пароль для ROOT "
-passwd --stdin
+#echo " Укажите пароль для ROOT "
+echo ""
+read -p "Укажите пароль для ROOT: " rootpassword
+#passwd --stdin
+echo passwd "$rootpassword" --stdin
 
 echo ""
 useradd -m -g users -G wheel -s /bin/bash $username
 echo ""
-echo 'Добавляем пароль для пользователя '$username' '
+#echo 'Добавляем пароль для пользователя '$username' '
+read -p "Укажите пароль для пользователя: " userpassword
 echo ""
-passwd $username --stdin
+#passwd $username --stdin
+echo "$username" | passwd "$userpassword" --stdin
 echo ""
 echo " Данный этап можно пропустить если не уверены в своем выборе!!! " 
 echo " "
