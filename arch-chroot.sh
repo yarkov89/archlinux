@@ -280,22 +280,25 @@ echo "FONT=cyr-sun16" >> /etc/vconsole.conf
 echo ""
 #echo " Укажите пароль для ROOT "
 echo ""
-read -p "Укажите пароль для ROOT: " rootpassword
+read -p "Укажите пароль для ROOT и пользователя '$username' : " rootpassword
+ROOT_HASH=$(mkpasswd -m sha-512 "$rootpassword")
 #passwd --stdin
 #echo passwd "$rootpassword" --stdin
 #echo "root":$rootpassword | chpasswd
-echo "root:$rootpassword" | chpasswd
+#echo "root:$rootpassword" | chpasswd
+usermod --password "$ROOT_HASH" root
 
 echo ""
 useradd -m -g users -G wheel -s /bin/bash $username
 echo ""
 #echo 'Добавляем пароль для пользователя '$username' '
-read -p "Укажите пароль для пользователя: " userpassword
-echo ""
+#read -p "Укажите пароль для пользователя: " userpassword
+#echo ""
 #passwd $username --stdin
 #echo "$username" | passwd "$userpassword" --stdin
 #echo $username:$userpassword | chpasswd
-echo "$username:$userpassword" | chpasswd
+#echo "$username:$rootpassword" | chpasswd
+usermod --password "$ROOT_HASH" username
 echo ""
 echo " Данный этап можно пропустить если не уверены в своем выборе!!! " 
 echo " "
